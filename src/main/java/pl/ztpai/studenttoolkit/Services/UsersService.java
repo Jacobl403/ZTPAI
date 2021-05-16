@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class AppUserService implements UserDetailsService {
+public class UsersService implements UserDetailsService {
 
     private  final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
@@ -47,6 +47,7 @@ public class AppUserService implements UserDetailsService {
                 userModel
         );
         tokenService.saveToken(verificationToken);
+
         return token;
     }
 

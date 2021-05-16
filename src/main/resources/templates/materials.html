@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Materiały</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -28,31 +28,31 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" th:href="@{/index}">
                   <span data-feather="home"></span>
                   Aktualności 
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" th:href="@{/settings}">
                   <span data-feather="users"></span>
                   Edycja profilu
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" th:href="@{/schedule}">
                   <span data-feather="layers"></span>
                   Plan zajęć
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="#">
+                <a class="nav-link " th:href="@{/notes}">
                   <span data-feather="file"></span>
                   Notatki 
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" th:href="@{/materials}">
                   <span data-feather="bar-chart-2"></span>
                   Materiały do zajęć<span class="sr-only">(current)</span>
                 </a>
@@ -66,7 +66,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+            <h1 class="h2"></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Wyloguj się </button>
@@ -74,6 +74,7 @@
           </div>
 
             </table>
+          </div>
           </div>
         </main>
       </div>

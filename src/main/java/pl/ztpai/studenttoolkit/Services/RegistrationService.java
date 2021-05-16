@@ -10,12 +10,12 @@ import pl.ztpai.studenttoolkit.Models.VerificationToken;
 
 import java.time.LocalDateTime;
 
-/*todo: valid password */
+
 @Service
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final AppUserService appUserService;
+    private final UsersService appUserService;
     private final EmailValidator emailValidator;
     private final TokenService tokenService;
     private final EmailSender emailService;

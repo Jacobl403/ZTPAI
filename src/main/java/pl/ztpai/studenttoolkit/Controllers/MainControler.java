@@ -4,36 +4,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-//controler post ktory po wpisaniu loginu i hasła przesyła metoda post zapytanie
-//login/register controller
-//sesion
 @Controller("/")
 public class MainControler {
-    @RequestMapping("/login")
-    public String printHelloWorld(){
+
+    @GetMapping(path = "/login")
+    public String getLoginForm(){
         return "login";
     }
 
     @GetMapping("/registration")
-    public String getRegisterform(){
+    public String getRegisterForm(){
         return "register";
     }
-
     @GetMapping("/index")
-    public String getindex(){
+    public String getIndexForm(){
         return "index";
     }
+    @GetMapping("/settings")
+    public String getSettingsForm(){return "settings";}
     @GetMapping("/materials")
-    public String getmaterials(){
+    public String getMaterialsForm(){
         return "materials";
     }
     @GetMapping("/notes")
-    public String getnotes(){
+    public String getNotesForm(){
         return "notes";
     }
     @GetMapping("/schedule")
-    public String getschedule(){
+    public String getScheduleForm(){
         return "schedule";
     }
 }

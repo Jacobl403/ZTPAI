@@ -7,6 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -27,11 +29,11 @@ public class Users implements UserDetails  {
     generator = "user_sequence")
 
     private Long id;
-
+    @NotBlank(message ="login cannot be empty")
     private String login;
-
+    @NotBlank(message = "login cannot be empty")
     private String password;
-
+    @Email(message = "Email should be valid")
     private String email;
 
     @Enumerated(EnumType.STRING)

@@ -1,7 +1,15 @@
 package pl.ztpai.studenttoolkit.Models;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 public class UserPrefences {
     @Id
@@ -9,36 +17,5 @@ public class UserPrefences {
     private String xls_file;
     private Integer subject_count;
 
-    public UserPrefences() {
-    }
 
-    public UserPrefences(Long ID, String xls_file, Integer subject_count) {
-        this.ID = ID;
-        this.xls_file = xls_file;
-        this.subject_count = subject_count;
-    }
-
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
-
-    public String getXls_file() {
-        return xls_file;
-    }
-
-    public void setXls_file(String xls_file) {
-        this.xls_file = xls_file;
-    }
-
-    public Integer getSubject_count() {
-        return subject_count;
-    }
-
-    public void setSubject_count(Integer subject_count) {
-        this.subject_count = subject_count;
-    }
 }
