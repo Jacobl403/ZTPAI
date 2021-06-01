@@ -4,7 +4,7 @@ package pl.ztpai.studenttoolkit.Services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ztpai.studenttoolkit.Models.RegistrationRequest;
+import pl.ztpai.studenttoolkit.RequestClass.RegistrationRequest;
 import pl.ztpai.studenttoolkit.Models.Users;
 import pl.ztpai.studenttoolkit.Models.VerificationToken;
 

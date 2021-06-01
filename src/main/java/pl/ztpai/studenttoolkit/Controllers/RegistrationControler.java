@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.ztpai.studenttoolkit.Models.RegistrationRequest;
+import pl.ztpai.studenttoolkit.RequestClass.RegistrationRequest;
 import pl.ztpai.studenttoolkit.Services.RegistrationService;
 
 //todo: handle password corectness , handle redirection ,token_confirmation

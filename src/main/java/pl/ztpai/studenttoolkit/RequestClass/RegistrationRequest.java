@@ -1,4 +1,4 @@
-package pl.ztpai.studenttoolkit.Models;
+package pl.ztpai.studenttoolkit.RequestClass;
 
 
 import lombok.AllArgsConstructor;
