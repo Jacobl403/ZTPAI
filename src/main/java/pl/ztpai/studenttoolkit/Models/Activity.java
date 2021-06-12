@@ -2,9 +2,8 @@ package pl.ztpai.studenttoolkit.Models;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+
 
 @Getter
 @Setter
@@ -14,9 +13,10 @@ import java.time.LocalDateTime;
 @Entity
 public class Activity {
     @Id
-    private Long ID;
-    private Integer typeOfActivity;
-    private String log;
-    private LocalDateTime dateOfActivity;
-
+    @GeneratedValue
+    private Long activityID;
+    private String content;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @JoinColumn(name="userId", referencedColumnName = "userId", nullable = false)
+    private Users user;
 }

@@ -1,8 +1,10 @@
 package pl.ztpai.studenttoolkit.Models;
 
 import lombok.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -11,10 +13,15 @@ import javax.persistence.Id;
 @Entity
 public class UserNotes {
     @Id
-    private Long id;
+    @GeneratedValue
+    private Long userNotesId;
     private String noteText;
-    //todo: zmienic na zmienna obsugującą plik
-    private String file;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Subject.class)
+    @JoinColumn(name="subjectusernotes", referencedColumnName = "subjectID", nullable = false)
+    private Subject subject;
 
-
+    @Override
+    public String toString() {
+        return noteText;
+    }
 }
