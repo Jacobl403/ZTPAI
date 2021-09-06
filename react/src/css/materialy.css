@@ -1,0 +1,37 @@
+.subMainMaterialy{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mainUpload{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin: 20px;
+    padding: 10px;
+    background-color:rgb(214, 214, 177);
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px 2px lightgrey;
+}
+
+.subjectName{
+    font-size: 20px;
+    text-align: left;
+}
+
+.uploadPliku button{
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: none;
+    box-shadow: 1px 1px 1px 1px lightgrey;
+}
+
+.uploadPliku button:hover{
+    background-color: mediumslateblue;
+    box-shadow: 1px 1px 1px 1px mediumslateblue;
+    cursor: pointer;
+}

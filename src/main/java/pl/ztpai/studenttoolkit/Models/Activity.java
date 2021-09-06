@@ -1,10 +1,10 @@
 package pl.ztpai.studenttoolkit.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+
 
 @Getter
 @Setter
@@ -14,9 +14,17 @@ import java.time.LocalDateTime;
 @Entity
 public class Activity {
     @Id
-    private Long ID;
-    private Integer typeOfActivity;
-    private String log;
-    private LocalDateTime dateOfActivity;
+    @GeneratedValue
+//    @JsonIgnore
+    private Long activityID;
+    private String content;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @JoinColumn(name="userId", referencedColumnName = "userId", nullable = false)
+    @JsonIgnore
+    private Users user;
 
+    public Activity(String content, Users user) {
+        this.content = content;
+        this.user = user;
+    }
 }
