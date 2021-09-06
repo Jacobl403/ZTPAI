@@ -15,7 +15,6 @@ public class RegistrationService {
     public RegistrationView register(RegistrationView request)
     {
         Users user1=new Users(request.getEmail(), request.getPassword());
-//        user1.setAmountOfSubjects(4);//to do usuniecia
         String status= appUserService.singUpUser(user1);
         request.setStatus(status);
        return request;

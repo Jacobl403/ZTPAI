@@ -43,7 +43,7 @@ public class EditProfileService {
     public editProfileView changeSubjects(Authentication auth, editProfileView request){
         String activity=new String(" ");
         Optional<Users> foundUser=userDB.findByEmail(auth.getPrincipal().toString());
-
+        foundUser.get().setScheme("");
         subjectRepository.deleteAllByUser(foundUser.get());
         foundUser.get().setAmountOfSubjects(request.getAmountofsubjects());
         List<Subject> newList=new ArrayList<>();

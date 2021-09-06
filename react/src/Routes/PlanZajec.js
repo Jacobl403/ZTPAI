@@ -47,13 +47,13 @@ const PlanZajec = () => {
 
     //POBRANIE PLANU Z BAZY 
     const getUserSchedule = async () => {
-        const response = await axios.get("http://25.41.160.138:8080/planzajec", {
+        const response = await axios.get("http://localhost:8080/planzajec", {
             headers: { 'Authorization' : 'Bearer ' + token }
         })
         if(response.data.state){
 
         if(response.data.state !== null){
-            console.log(JSON.parse(response.data.state))
+            
             let stateArray = []
             if(!localStorage.getItem('state')){
                 stateArray = JSON.parse(response.data.state)
@@ -66,8 +66,8 @@ const PlanZajec = () => {
     //ZAPISANIE PLANU DO BAZY
     const saveUserSchedule = async () => {
         let stanPlanu = localStorage.getItem('state')
-        console.log(stanPlanu)
-        const data = await fetch('http://25.41.160.138:8080/planzajec/zapiszstan', {
+       
+        const data = await fetch('http://localhost:8080/planzajec/zapiszstan', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -79,13 +79,13 @@ const PlanZajec = () => {
             })
         })
         const resp = await data.json();
-        console.log(resp)
+        
         setZapisano('Plan zajęć został zapisany!')
     }
 
     //RESETOWANIE PLANU W BAZIE
     const ResetUserSchedule = async () => {
-        const data = await fetch('http://25.41.160.138:8080/planzajec/zapiszstan', {
+        const data = await fetch('http://localhost:8080/planzajec/zapiszstan', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -97,7 +97,7 @@ const PlanZajec = () => {
             })
         })
         const resp = await data.json();
-        console.log(resp)
+        
     }
 
     //WYBRANIE PRZEDMIOTU Z LISTY

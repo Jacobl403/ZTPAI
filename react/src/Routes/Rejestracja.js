@@ -18,7 +18,7 @@ const Rejestracja = () => {
 
 
         if(password === password2){
-            const data = await fetch ('http://25.41.160.138:8080/rejestracja/nowyuzytkownik', {
+            const data = await fetch ('http://localhost:8080/rejestracja/nowyuzytkownik', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -32,7 +32,7 @@ const Rejestracja = () => {
             })
             const resp = await data.json();
             setStatus(resp.status)
-            console.log(resp.status)
+            
         }
 
         if(password !== password2){

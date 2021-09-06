@@ -9,12 +9,9 @@ const StronaLogowania = (props) => {
     const [password, setPassword] = useState('');
     let history = useHistory()
     const zaloguj = async () => {
-        console.log('Username:', username)
-        console.log('Password:', password)
-        // let formData = new formData();
-        // formData.append('email', username)
-        // formData.append('password', )
-        const response = await fetch ('http://25.41.160.138:8080/zaloguj', {
+
+
+        const response = await fetch ('http://localhost:8080/zaloguj', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -26,9 +23,9 @@ const StronaLogowania = (props) => {
                 token: null
             })
         })
-        // console.log(response.body)
+        
         const r = await response.json();
-        console.log(r.token)
+     
 
         await delay(500)
         localStorage.setItem('token', r.token)
