@@ -16,30 +16,23 @@ import pl.ztpai.studenttoolkit.Repository.UserRepository;
 @Service
 @AllArgsConstructor
 public class UsersService implements UserDetailsService {
-
     private  final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
-    private final SubjectRepository subDB;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
     {
         return  userRepository.findByEmail(email).
                 orElseThrow(()->new UsernameNotFoundException("USER NOT FOUND"));
-
     }
     public String singUpUser(Users userEntity)
     {
 
         boolean isUserInDB= userRepository.findByEmail(userEntity.getEmail()).isPresent();
-        if(isUserInDB)return"ERROR:user already exist";
-//        String encodedPassword=encoder.encode(userEntity.getPassword());
-//        userEntity.setPassword(encodedPassword);
+        if(isUserInDB)return"uzytkownik o podanym emailu istnieje";
+        String encodedPassword=encoder.encode(userEntity.getPassword());
+        userEntity.setPassword(encodedPassword);
         userRepository.save(userEntity);
-        subDB.save(new Subject("Nokia",userEntity ));
-        subDB.save(new Subject("ZTPAI",userEntity ));
-        subDB.save(new Subject("PTS",userEntity ));
-        subDB.save(new Subject("Kappa",userEntity ));
-        return "redirect:/login";
+        return "Pomyslnie utworzono uzytkownika";
     }
 
     public int enableUsers(String  email ){

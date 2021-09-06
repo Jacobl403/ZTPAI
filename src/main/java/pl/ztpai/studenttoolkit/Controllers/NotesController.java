@@ -1,12 +1,11 @@
 package pl.ztpai.studenttoolkit.Controllers;
 
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import pl.ztpai.studenttoolkit.Payload.NotesView;
 import pl.ztpai.studenttoolkit.Services.NotesService;
 
 @RestController
@@ -16,13 +15,24 @@ import pl.ztpai.studenttoolkit.Services.NotesService;
 public class NotesController {
     private final NotesService notesService;
     @GetMapping
-    public ObjectNode getNotes(){
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("kuba_lag@o2.pl",
-                "gumisie"));
+    public @ResponseBody NotesView getNotes(){
+//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("kuba_lag@o2.pl",
+//                "gumisie"));
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return notesService.getNotes(auth);
     }
-    @PostMapping
-    public void saveNotes(){
+    @PostMapping("/dodajnotatke")
+    public NotesView saveNotes(@RequestBody NotesView request){
+//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("kuba_lag@o2.pl",
+//                "gumisie"));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return notesService.saveNotes(auth,request);
+    }
+    @PostMapping("/usunnotatke")
+    public NotesView deleteNote(@RequestBody NotesView request){
+//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("kuba_lag@o2.pl",
+//                "gumisie"));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return notesService.deleteNote(auth,request);
     }
 }

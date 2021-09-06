@@ -1,34 +1,38 @@
 package pl.ztpai.studenttoolkit.Controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import pl.ztpai.studenttoolkit.RequestClass.LoginRequest;
-import pl.ztpai.studenttoolkit.Services.LoginService;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+import pl.ztpai.studenttoolkit.Config.JwtTokenUtil;
+import pl.ztpai.studenttoolkit.Models.Users;
+import pl.ztpai.studenttoolkit.Payload.LoginView;
 
 @RestController
 @RequestMapping("/zaloguj")
 @CrossOrigin
+@AllArgsConstructor
 public class LoginController {
-    @Autowired
-    private LoginService loginService;
+
+
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
 
     @PostMapping
-    public String register(LoginRequest request){
-        String result=loginService.signIn(request);
+    public ResponseEntity<?> register(@RequestBody LoginView request){
+        try{
 
-        if (result.equals("ERROR")){
-            //co należy wysłać do reacta aby to działało
-            return "ERROR";
-        }else {
-            SecurityContextHolder.getContext().setAuthentication(
-                    new UsernamePasswordAuthenticationToken(request.getLogin(),
-                    request.getPassword()));
-            return result;
+            Authentication authenticate= authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+            Users user=(Users)authenticate.getPrincipal();
+            request.setToken(jwtTokenUtil.generateAccessToken(user));
+            return ResponseEntity.ok().body(request);
+        }catch(BadCredentialsException ex){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("error");
         }
 
     }

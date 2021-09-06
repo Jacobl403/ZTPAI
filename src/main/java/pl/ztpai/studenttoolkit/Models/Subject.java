@@ -1,8 +1,10 @@
 package pl.ztpai.studenttoolkit.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,20 +19,19 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "subject_sequence")
-    private Long subjectID;
-    private String subjectName;
-    private Integer xRow;
-    private Integer yRow;
 
+    private Long subjectID;
+
+    private String subjectName;
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name="usersubject", referencedColumnName = "userId", nullable = false)
     private Users user;
 
-    @OneToMany(mappedBy="subject",fetch=FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy="subject",fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<UserNotes> userNotes=new ArrayList<UserNotes>();
 
-    @OneToMany(mappedBy="subject",fetch=FetchType.LAZY,cascade = CascadeType.PERSIST)
-    private List<Materials>materials=new ArrayList<Materials>();
 
     public Subject(String subjectName, Users user) {
         this.subjectName = subjectName;

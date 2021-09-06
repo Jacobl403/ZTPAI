@@ -1,13 +1,15 @@
 package pl.ztpai.studenttoolkit.Services;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import pl.ztpai.studenttoolkit.Models.Subject;
+import pl.ztpai.studenttoolkit.Models.UserNotes;
 import pl.ztpai.studenttoolkit.Models.Users;
+import pl.ztpai.studenttoolkit.Payload.NotesView;
+import pl.ztpai.studenttoolkit.Repository.SubjectRepository;
+import pl.ztpai.studenttoolkit.Repository.UserNotesRepository;
 import pl.ztpai.studenttoolkit.Repository.UserRepository;
 
 import java.util.Optional;
@@ -16,22 +18,24 @@ import java.util.Optional;
 @AllArgsConstructor
 public class NotesService {
     private final UserRepository userDB;
-
-    public ObjectNode getNotes(Authentication auth){
-        ObjectMapper mapper=new ObjectMapper();
-        ObjectNode JsonFormat=mapper.createObjectNode();
-
-        Optional<Users> findedUser=userDB.findByEmail(auth.getPrincipal().toString());
-
-        for (Subject name :findedUser.get().getSubjects()){
-            JsonFormat.put(name.getSubjectName(),name.getUserNotes().toString());
-        }
-        //{Nokia:["blabla","blabla2","blasd3"]}
-        return JsonFormat;
+    private final SubjectRepository subjectRepository;
+    private final UserNotesRepository userNotesRepository;
+    public NotesView getNotes(Authentication auth){
+        Optional<Users> foundUser=userDB.findByEmail(auth.getPrincipal().toString());
+        return new NotesView(foundUser.get().getSubjects());
     }
 
-
-//    public String getNotes(){
-//        return "it also works";
-//    }
+    public NotesView saveNotes(Authentication auth, NotesView request){
+        Optional<Users> foundUser=userDB.findByEmail(auth.getPrincipal().toString());
+        Optional<Subject>foundSubject=subjectRepository.findSubjectByUserAndSubjectName(foundUser.get(), request.getSubject());
+        UserNotes userNotes=new UserNotes(request.getText(),foundSubject.get());
+        userNotesRepository.save(userNotes);
+        return request;
+    }
+    public NotesView deleteNote(Authentication auth, NotesView request){
+        Optional<Users> foundUser=userDB.findByEmail(auth.getPrincipal().toString());
+        Optional<Subject>foundSubject=subjectRepository.findSubjectByUserAndSubjectName(foundUser.get(), request.getSubject());
+        userNotesRepository.deleteByNoteTextAndAndSubject(request.getText(),foundSubject.get());
+        return request;
+    }
 }

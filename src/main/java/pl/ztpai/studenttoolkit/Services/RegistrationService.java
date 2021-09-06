@@ -3,7 +3,7 @@ package pl.ztpai.studenttoolkit.Services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.ztpai.studenttoolkit.RequestClass.RegistrationRequest;
+import pl.ztpai.studenttoolkit.Payload.RegistrationView;
 import pl.ztpai.studenttoolkit.Models.Users;
 
 
@@ -12,16 +12,13 @@ import pl.ztpai.studenttoolkit.Models.Users;
 public class RegistrationService {
 
     private final UsersService appUserService;
-    public String register(RegistrationRequest request)
+    public RegistrationView register(RegistrationView request)
     {
-        Users user1=new Users(
-                request.getLogin(),
-                request.getPassword(),
-                request.getEmail());
-       String registrationResult= appUserService.singUpUser(user1);
-
-
-       return registrationResult;
+        Users user1=new Users(request.getEmail(), request.getPassword());
+//        user1.setAmountOfSubjects(4);//to do usuniecia
+        String status= appUserService.singUpUser(user1);
+        request.setStatus(status);
+       return request;
     }
 
 

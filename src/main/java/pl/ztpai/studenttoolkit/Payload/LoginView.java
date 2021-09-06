@@ -1,4 +1,4 @@
-package pl.ztpai.studenttoolkit.RequestClass;
+package pl.ztpai.studenttoolkit.Payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginRequest {
-    private String login;
+public class LoginView {
+    private String email;
     private String password;
-    private Boolean remember=false;
+    private String token;
 }
