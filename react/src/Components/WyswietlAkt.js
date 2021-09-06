@@ -11,12 +11,12 @@ const WyswietlAkt = () => {
     }
 
     const getActivities = async () => {
-        const response = await axios.get("http://25.41.160.138:8080/aktualnosci", {
+        const response = await axios.get("http://localhost:8080/aktualnosci", {
             headers: { 'Authorization' : 'Bearer ' + token }
         })
-        console.log(response.data.activities)
+        
         setUserActivities(response.data.activities)
-        console.log(userActivites)
+        
     }
 
     useEffect(() => {

@@ -11,7 +11,7 @@ const Sidebar = (props) => {
     }
 
     useEffect(() => {
-        console.log(props.stan)
+        
         if(props.stan === 1){
             setLogged('Wyloguj się')
             setRenderThis('')

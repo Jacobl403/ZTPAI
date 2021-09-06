@@ -36,17 +36,17 @@ const EdycjaProfilu = () => {
             arr.push(val)
         }
         setUserSubjects(sbArr)
-        console.log(arr)
+        
         postSubjects()
         // localStorage.setItem('edycjaProfiluSubs', JSON.stringify(arr))
         // setPrzedmiotyAccepted(true)
     }
 
     const GetUserSubs = async () => {
-        const response = await axios.get("http://25.41.160.138:8080/edycjaprofilu", {
+        const response = await axios.get("http://localhost:8080/edycjaprofilu", {
             headers: { 'Authorization' : 'Bearer ' + token }
         })
-        console.log(response)
+        
         setSubsArray(response.data.subjects)
         localStorage.setItem('testStorage', JSON.stringify(response.data.subjects))
     }
@@ -57,7 +57,7 @@ const EdycjaProfilu = () => {
 
     const postSubjects = async () => {
         await delay(500)
-        const data = await fetch ('http://25.41.160.138:8080/edycjaprofilu/zmianaprzedmiotow', {
+        const data = await fetch ('http://localhost:8080/edycjaprofilu/zmianaprzedmiotow', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -71,8 +71,10 @@ const EdycjaProfilu = () => {
                 subjects: arr
             })
         })
+        localStorage.removeItem("state")
+        
         const resp = await data.json();
-        console.log(resp)
+        
         window.location.reload()
     }
 
@@ -129,7 +131,7 @@ const EdycjaProfilu = () => {
 
     //POST DO SERWERA (ZMIANA EMAILA)
     const handleEmailChange = async () => {
-        const data = await fetch ('http://25.41.160.138:8080/edycjaprofilu/zmianaemail', {
+        const data = await fetch ('http://localhost:8080/edycjaprofilu/zmianaemail', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -144,7 +146,7 @@ const EdycjaProfilu = () => {
             })
         })
         const resp = await data.json();
-        console.log(resp)
+       
         localStorage.removeItem('token')
         history.push('/')
     }
@@ -152,7 +154,7 @@ const EdycjaProfilu = () => {
     //POST DO SERWERA (ZMIANA HASLA)
     const handlePasswordChange = async () => {
         if(password === password2){
-            const data = await fetch ('http://25.41.160.138:8080/edycjaprofilu/zmianahasla', {
+            const data = await fetch ('http://localhost:8080/edycjaprofilu/zmianahasla', {
                 method: 'POST',
                 headers: {
                     'Content-type' : 'application/json',
@@ -167,7 +169,7 @@ const EdycjaProfilu = () => {
             })
 
             const resp = await data.json()
-            console.log(resp)
+            
             localStorage.removeItem('token')
             history.push('/')
         }else{

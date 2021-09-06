@@ -15,7 +15,7 @@ const Notatki = () => {
   }
 
   const GetUserSubs = async () => {
-      const response = await axios.get("http://25.41.160.138:8080/edycjaprofilu", {
+      const response = await axios.get("http://localhost:8080/edycjaprofilu", {
         headers: { 'Authorization' : 'Bearer ' + token }
       })
       setUserSubjects(response.data.subjects)
@@ -30,7 +30,7 @@ const Notatki = () => {
   }, [userSubjects])
 
   const GetUserNotes = async () => {
-      const response = await axios.get("http://25.41.160.138:8080/notatki", {
+      const response = await axios.get("http://localhost:8080/notatki", {
         headers: { 'Authorization' : 'Bearer ' + token }
       })
 
@@ -44,7 +44,7 @@ const Notatki = () => {
           
           for(let j = 0; j < response.data.subjects[i].userNotes.length; j++){
             let text=arr[j];
-            console.log(text)
+            
             const nextState = produce(datatext, draftState => {
               draftState.push({text});
           });

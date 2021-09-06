@@ -26,10 +26,10 @@ function App() {
   useEffect(() => {
     if(localStorage.getItem('token')){
       setState(true)
-      console.log(state)
+      
     }else{
       setState(false)
-      console.log(state)
+      
     }
   })
 
